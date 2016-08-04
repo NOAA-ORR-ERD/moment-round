@@ -1,6 +1,6 @@
-(function() {
-
-  var moment = (typeof require !== "undefined" && require !== null) && !require.amd ? require("moment") : this.moment;
+define(function(require) {
+'use strict';
+  var moment = require("moment");
 
   moment.fn.round = function(precision, key, direction) {
     if(typeof direction === 'undefined') {
@@ -52,4 +52,4 @@
   if ((typeof module !== "undefined" && module !== null ? module.exports : void 0) != null) {
     module.exports = moment;
   }
-}).call(this);
+})
