@@ -1,6 +1,6 @@
-(function() {
-
-  var moment = (typeof require !== "undefined" && require !== null) && !require.amd ? require("moment") : this.moment;
+define(function(require) {
+'use strict';
+  var moment = require("moment");
 
   moment.fn.round = function(precision, key, direction) {
     if(typeof direction === 'undefined') {
@@ -23,11 +23,11 @@
     var maxValue ;
     for (var i in keys) {
       var k = keys[i];
-      if (k === key) {
+      if (k === key && typeof this._d['get' + key] === "function") {
         value = this._d['get' + key]();
         maxValue = maxValues[i];
         rounded = true;
-      } else if(rounded) {
+      } else if(rounded && typeof this._d['get' + k] === "function") {
         subRatio *= maxValues[i];
         value += this._d['get' + k]() / subRatio;
         this._d['set' + k](0);
@@ -52,4 +52,4 @@
   if ((typeof module !== "undefined" && module !== null ? module.exports : void 0) != null) {
     module.exports = moment;
   }
-}).call(this);
+})
